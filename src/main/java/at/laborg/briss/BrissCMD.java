@@ -79,7 +79,7 @@ public final class BrissCMD {
 		try {
 			for (PageCluster cluster : clusterDefinition.getClusterList()) {
 				Float[] auto = CropFinder.getAutoCropFloats(cluster
-						.getImageData().getPreviewImage());
+						.getImageData().getPreviewImage(), 0.75);
 				cluster.addRatios(auto);
 			}
 			CropDefinition cropDefintion = CropDefinition.createCropDefinition(

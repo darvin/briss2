@@ -93,7 +93,7 @@ public class MergedPanel extends JPanel {
 		this.cluster = cluster;
 		this.img = cluster.getImageData().getPreviewImage();
 		if (addAutoRatios) {
-			Float[] autoRatios = CropFinder.getAutoCropFloats(img);
+			Float[] autoRatios = CropFinder.getAutoCropFloats(img, 0.75);
 			cluster.addRatios(autoRatios);
 		}
 		setPreferredSize(new Dimension(img.getWidth(), img.getHeight()));

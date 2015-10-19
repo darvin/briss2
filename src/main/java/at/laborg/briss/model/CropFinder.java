@@ -20,7 +20,7 @@ public final class CropFinder {
 	public static final int ORIENTATION_RIGHT = 2;
 	public static final int ORIENTATION_BOTTOM = 3;
 
-	public static Float[] getAutoCropFloats(final BufferedImage image) {
+	public static Float[] getAutoCropFloats(final BufferedImage image, final double targetRatio) {
 
 		WritableRaster raster = image.getRaster();
 
@@ -39,12 +39,32 @@ public final class CropFinder {
 		int positionYBottom = findPosition(sdOfDerivationY, ORIENTATION_BOTTOM);
 
 		Float[] result = new Float[4];
+
+		if (targetRatio!=0.0) {
+			int width = image.getWidth()-positionXLeft-positionXRight;
+			int height = image.getHeight()-positionYTop-positionYBottom;
+
+			float resultRatio = (float)width/height;
+			if (resultRatio>targetRatio) {
+				int targetWidth = (int)(width + (targetRatio-resultRatio)*height);
+				int widthAdj = targetWidth/2;
+				positionXLeft -= widthAdj;
+				positionXRight += widthAdj;
+			} else if (resultRatio<targetRatio){
+				int targetHeight = (int)(height + (float)width/(float)(targetRatio-resultRatio));
+				int heightAdj = targetHeight/2;
+				positionYTop -= heightAdj*2;
+				// positionYBottom += heightAdj;
+			}
+		}
+
 		result[0] = (positionXLeft / (float) image.getWidth());
 		result[1] = ((image.getHeight() - positionYBottom) / (float) image
 				.getHeight());
 		result[2] = ((image.getWidth() - positionXRight) / (float) image
 				.getWidth());
 		result[3] = (positionYTop / (float) image.getHeight());
+		
 		return result;
 	}
 
