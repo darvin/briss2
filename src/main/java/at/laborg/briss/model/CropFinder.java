@@ -41,19 +41,16 @@ public final class CropFinder {
 		Float[] result = new Float[4];
 
 		if (targetRatio!=0.0) {
-			int width = image.getWidth()-positionXLeft-positionXRight;
-			int height = image.getHeight()-positionYTop-positionYBottom;
-
+			int width = positionXRight-positionXLeft;
+			int height = positionYBottom-positionYTop;
 			float resultRatio = (float)width/height;
-			if (resultRatio>targetRatio) {
-				int targetWidth = (int)(width + (targetRatio-resultRatio)*height);
-				int widthAdj = targetWidth/2;
-				positionXLeft -= widthAdj;
-				positionXRight += widthAdj;
-			} else if (resultRatio<targetRatio){
-				int targetHeight = (int)(height + (float)width/(float)(targetRatio-resultRatio));
-				int heightAdj = targetHeight/2;
-				positionYTop -= heightAdj*2;
+			if (resultRatio<targetRatio) {
+				int targetWidthAdj = (int)(((float)(targetRatio-resultRatio)*(float)width)/2);
+				positionXLeft -= targetWidthAdj;
+				positionXRight += targetWidthAdj;
+			} else if (resultRatio>targetRatio){
+				int targetHeightAdj = (int)(((float)(targetRatio-resultRatio)*(float)height)/2);
+				positionYTop -= targetHeightAdj*2;
 				// positionYBottom += heightAdj;
 			}
 		}
