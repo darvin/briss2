@@ -879,7 +879,7 @@ public class BrissGUI extends JFrame implements ActionListener,
 
 			try {
 				clusterDefinition = ClusterCreator.clusterPages(source,
-						pageExcludes);
+						pageExcludes, false);
 
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block

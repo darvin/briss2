@@ -89,8 +89,8 @@ public class PageCluster implements Comparable<PageCluster> {
 		}
 	}
 
-	public final boolean isClusterNearlyEqual(final PageCluster other) {
-		if (evenPage != other.evenPage)
+	public final boolean isClusterNearlyEqual(final PageCluster other, boolean evenOddDifferent) {
+		if (evenOddDifferent && evenPage != other.evenPage)
 			return false;
 		if (excluded || other.excluded)
 			return false;

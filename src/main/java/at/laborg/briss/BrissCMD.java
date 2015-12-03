@@ -53,7 +53,7 @@ public final class BrissCMD {
 		ClusterDefinition clusterDefinition = null;
 		try {
 			clusterDefinition = ClusterCreator.clusterPages(
-					workDescription.getSourceFile(), null);
+					workDescription.getSourceFile(), null, true);
 		} catch (IOException e1) {
 			System.out.println("Error occured while clustering.");
 			e1.printStackTrace(System.out);
@@ -113,7 +113,7 @@ public final class BrissCMD {
 		ClusterDefinition clusterDefinition = null;
 		try {
 			clusterDefinition = ClusterCreator.clusterPages(
-					workDescription.getSourceFile(), null);
+					workDescription.getSourceFile(), null, true);
 		} catch (IOException e1) {
 			System.out.println("Error occured while clustering.");
 			e1.printStackTrace(System.out);

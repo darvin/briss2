@@ -33,7 +33,7 @@ public final class ClusterCreator {
 	};
 
 	public static ClusterDefinition clusterPages(final File source,
-			final PageExcludes pageExcludes) throws IOException {
+			final PageExcludes pageExcludes, boolean evenOddDifferent) throws IOException {
 		PdfReader reader = new PdfReader(source.getAbsolutePath());
 
 		ClusterDefinition clusters = new ClusterDefinition();
@@ -53,7 +53,7 @@ public final class ClusterCreator {
 					(int) layoutBox.getWidth(), (int) layoutBox.getHeight(),
 					excluded, page);
 
-			clusters.addOrMergeCluster(tmpCluster);
+			clusters.addOrMergeCluster(tmpCluster, evenOddDifferent);
 		}
 		reader.close();
 		clusters.selectAndSetPagesForMerging();

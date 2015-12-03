@@ -44,8 +44,8 @@ public class ClusterDefinition {
 		return result;
 	}
 
-	public final void addOrMergeCluster(final PageCluster tmpCluster) {
-		PageCluster existingCluster = findNearlyEqualCluster(tmpCluster);
+	public final void addOrMergeCluster(final PageCluster tmpCluster, boolean evenOddDifferent) {
+		PageCluster existingCluster = findNearlyEqualCluster(tmpCluster, evenOddDifferent);
 		if (existingCluster != null) {
 			existingCluster.mergeClusters(tmpCluster);
 		} else {
@@ -53,9 +53,9 @@ public class ClusterDefinition {
 		}
 	}
 
-	private PageCluster findNearlyEqualCluster(final PageCluster clusterToCheck) {
+	private PageCluster findNearlyEqualCluster(final PageCluster clusterToCheck, boolean evenOddDifferent) {
 		for (PageCluster cluster : clusters) {
-			if (cluster.isClusterNearlyEqual(clusterToCheck))
+			if (cluster.isClusterNearlyEqual(clusterToCheck, evenOddDifferent))
 				return cluster;
 		}
 		return null;
